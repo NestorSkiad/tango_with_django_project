@@ -135,14 +135,14 @@ def user_login(request):
                 return HttpResponse('Your Rango account is disabled.')
         else:
             print('Invalid login details: {0}, {1}'.format(username, password))
-            return HttpResponse('Invalid login details supplied.')
+            return render(request, 'rango/login.html', {'invalid_login': 'Your login details are invalid.'})
     else:
-        return render(request, 'rango/login.html', {})
+        return render(request, 'rango/login.html', {'invalid_login': ''})
 
 
 @login_required
 def restricted(request):
-    return HttpResponse("Since you're logged in, you can see this text!")
+    return render(request, 'rango/restricted.html', {})
 
 
 @login_required
